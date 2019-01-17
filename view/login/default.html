@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es" >
 <head>
+   <!-- ADAPTADO PARA COMERSANOMOLA -->
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    <title>{if="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}</title>
    <meta name="description" content="FacturaScripts es un software de facturación y contabilidad para pymes. Es software libre bajo licencia GNU/LGPL." />
@@ -18,24 +19,12 @@
    <script type="text/javascript" src="{#FS_PATH#}view/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/jquery.ui.shake.js"></script>
    <script type="text/javascript">
-      {if="FS_DEMO"}
-         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-         ga('create', 'UA-417932-8', 'auto');
-         ga('send', 'pageview');
-      {/if}
       $(document).ready(function() {
          {if="$fsc->get_errors()"}
          $("#box_login").shake();
          {/if}
          
-         {if="FS_DEMO"}
          document.f_login.user.focus();
-         {else}
-         document.f_login.password.focus();
-         {/if}
          
          $("#b_feedback").click(function(event) {
             event.preventDefault();
@@ -62,7 +51,7 @@
             </button>
             <a class="navbar-brand" href="index.php">
                <i class="fa fa-lock" aria-hidden="true"></i>&nbsp;
-               {if="FS_DEMO"}DEMO FacturaScripts{elseif="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}
+               {if="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}
             </a>
          </div>
          <div class="collapse navbar-collapse" id="fs-navbar-collapse-1">
@@ -123,11 +112,7 @@
                      <i class="fa fa-user" aria-hidden="true"></i>&nbsp; Iniciar sesión
                   </h1>
                   <p class="help-block">
-                     {if="FS_DEMO"}
-                     Bienvenido a la demo de FacturaScripts, escribe tu email para continuar:
-                     {else}
                      Debes seleccionar tu usuario e introducir la contraseña para acceder al sistema.
-                     {/if}
                   </p>
                </div>
                <div class="well well-sm">
@@ -136,9 +121,7 @@
                      <div class="row">
                         <div class="col-sm-4 col-md-5">
                            <div class="thumbnail hidden-xs">
-                              {if="FS_DEMO"}
-                              <img src="{#FS_PATH#}view/img/logo.png" alt="logo"/>
-                              {elseif="file_exists(FS_MYDOCS.'images/logo.png')"}
+                              {if="file_exists(FS_MYDOCS.'images/logo.png')"}
                               <img src="images/logo.png" alt="{$fsc->empresa->nombre}"/>
                               {elseif="file_exists(FS_MYDOCS.'images/logo.jpg')"}
                               <img src="images/logo.jpg" alt="{$fsc->empresa->nombre}"/>
@@ -148,12 +131,6 @@
                            </div>
                         </div>
                         <div class="col-sm-8 col-md-7">
-                           {if="FS_DEMO"}
-                           <input type="hidden" name="password" value="demo"/>
-                           <div class="form-group">
-                              <input type="text" name="user" class="form-control input-lg" placeholder="Escribe tu email" required="" autocomplete="off"/>
-                           </div>
-                           {else}
                            <div class="form-group">
                               <input type="text" name="user" class="form-control input-lg" placeholder="Escribe tu usuario" required="" autocomplete="off"/>
                            </div>
@@ -163,7 +140,6 @@
                                  <a href="#" id="b_new_password">¿Has olvidado la contraseña?</a>
                               </p>
                            </div>
-                           {/if}
                            <button class="btn btn-block btn-primary" type="submit" id="login">
                               <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp; Iniciar sesión
                            </button>
@@ -179,7 +155,6 @@
    
    <div class="visible-md visible-lg" style="margin-bottom: 100px;"></div>
    
-   {if="!FS_DEMO"}
    <div class="modal" id="modal_new_password">
       <div class="modal-dialog">
          <div class="modal-content">
@@ -222,9 +197,7 @@
          </div>
       </div>
    </div>
-   {/if}
    
    {include="feedback"}
-   <hr style="margin-top: 50px;"/>
 </body>
 </html>
